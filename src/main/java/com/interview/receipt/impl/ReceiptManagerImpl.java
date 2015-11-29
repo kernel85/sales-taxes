@@ -19,8 +19,8 @@ public class ReceiptManagerImpl implements ReceiptManager {
 			shoppingCart.getEntries().stream().map(sce -> {
 				int        quantity  = sce.getQuantity();
 				BigDecimal tax       = sce.getItem().isImported() ? sce.getSaleTax().add(TaxManager.DUTY_TAX) : sce.getSaleTax();
-				BigDecimal saleTax   = taxManager.calculateSaleTax(sce.getUnitSalePrice(), tax); 
-				BigDecimal salePrice = sce.getUnitSalePrice().add(saleTax);
+				BigDecimal saleTax   = taxManager.calculateSaleTax(sce.getUnitSalePrice(), tax).multiply(BigDecimal.valueOf(quantity));
+				BigDecimal salePrice = sce.getUnitSalePrice().multiply(BigDecimal.valueOf(quantity)).add(saleTax);
 				return ReceiptEntry.of(sce.getItem().getName(), quantity, salePrice, saleTax);
 			}).collect(Collectors.toList())
 		);
