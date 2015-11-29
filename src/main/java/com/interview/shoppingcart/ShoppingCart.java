@@ -1,36 +1,33 @@
 package com.interview.shoppingcart;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.interview.item.Item;
 
 public class ShoppingCart {
 	
 	public static ShoppingCart empty() {
-		return new ShoppingCart(new LinkedList<>());
+		return new ShoppingCart(new HashMap<>());
 	}
 	
-	private ShoppingCart(List<ShoppingCartEntry> entries) {
-		this.entries = checkNotNull(entries, "shopping cart list cannot be a null value");
+	private ShoppingCart(Map<Item, Integer> entries) {
+		this.entries = entries;
 	}
 	
-	private final List<ShoppingCartEntry> entries;
-	
-	public ShoppingCart add(ShoppingCartEntry entry) {
-		entries.add(checkNotNull(entry, "shopping cart entry cannot be a null value"));
-		return this;
-	}
+	private final Map<Item, Integer> entries;
 	
 	public ShoppingCart add(Item item, int quantity) {
-		entries.add(ShoppingCartEntry.of(item, quantity));
+		entries.merge(item, quantity, Integer::sum);
 		return this;
 	}
 	
 	public List<ShoppingCartEntry> getEntries() { 
-		return entries; 
+		return entries.entrySet().stream().map((Map.Entry<Item,Integer> e) -> {
+			return ShoppingCartEntry.of(e.getKey(), e.getValue());
+		}).collect(Collectors.toList());
 	}
 
 }

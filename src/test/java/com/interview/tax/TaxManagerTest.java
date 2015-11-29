@@ -20,7 +20,12 @@ public class TaxManagerTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeTax() {
-		assertEquals(bd("1.00"), taxManager.calculateSaleTax(bd("10"), bd("-0.10")));
+		assertEquals(bd("1.00"), taxManager.calculateSaleTax(bd("10"), bd("-0.05")));
 	}
-
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void invalidTax() {
+		assertEquals(bd("1.00"), taxManager.calculateSaleTax(bd("10"), bd("1.05")));
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.interview.receipt.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ public class ReceiptManagerImpl implements ReceiptManager {
 	@Inject TaxManager taxManager;
 	
 	@Override public Receipt generateReceipt(ShoppingCart shoppingCart) {
+		checkNotNull(shoppingCart);
 		return Receipt.of(
 			shoppingCart.getEntries().stream().map(sce -> {
 				int        quantity  = sce.getQuantity();

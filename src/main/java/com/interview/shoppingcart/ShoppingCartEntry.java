@@ -15,7 +15,7 @@ public class ShoppingCartEntry {
 	
 	private ShoppingCartEntry(Item item, int quantity) {
 		checkArgument(quantity > 0, "quantity must be a positive value");
-		this.item          = checkNotNull(item, "item cannot be a nulla value");
+		this.item          = checkNotNull(item, "item cannot be a null value");
 		this.quantity      = quantity;
 		this.unitSalePrice = item.getShelfPrice();
 		this.saleTax       = item.getCategory().getSaleTax();
