@@ -10,7 +10,7 @@ public enum ItemCategory {
 	BOOK    (BigDecimal.ZERO),
 	FOOD    (BigDecimal.ZERO),
 	MEDICAL (BigDecimal.ZERO),
-	OTHER   (new BigDecimal("0.10"));
+	OTHER   (BigDecimal.valueOf(0.10d));
 	
 	private ItemCategory(BigDecimal saleTax) {
 		checkNotNull(saleTax, "sale tax cannot be a null value");
