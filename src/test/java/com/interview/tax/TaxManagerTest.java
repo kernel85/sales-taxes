@@ -1,7 +1,7 @@
 package com.interview.tax;
 
 import static junit.framework.Assert.assertEquals;
-import static utils.TestUtils.bd;
+import static utils.Utils.bd;
 
 import org.junit.Test;
 
